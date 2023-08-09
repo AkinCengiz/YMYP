@@ -12,7 +12,7 @@ namespace ToDoApp
 
             string dateInfo = dtpDate.Value.ToShortDateString();
             string timeInfo = dtpTime.Value.ToShortTimeString();
-            dgvToDo.Rows.Add(dateInfo, timeInfo, txtTitle.Text, txtDescription.Text);
+            dgvToDo.Rows.Add(dateInfo, timeInfo, txtTitle.Text, txtDescription.Text, cbxStatus.Text);
             ClearControls();
         }
 
@@ -24,6 +24,7 @@ namespace ToDoApp
             dgvToDo.CurrentRow.Cells[1].Value = timeInfo;
             dgvToDo.CurrentRow.Cells[2].Value = txtTitle.Text;
             dgvToDo.CurrentRow.Cells[3].Value = txtDescription.Text;
+            dgvToDo.CurrentRow.Cells[4].Value = cbxStatus.Text;
             ClearControls();
         }
 
@@ -33,10 +34,12 @@ namespace ToDoApp
             dtpTime.Value = Convert.ToDateTime(dgvToDo.CurrentRow.Cells[1].Value);
             txtTitle.Text = dgvToDo.CurrentRow.Cells[2].Value.ToString();
             txtDescription.Text = dgvToDo.CurrentRow.Cells[3].Value.ToString();
+            cbxStatus.Text = dgvToDo.CurrentRow.Cells[4].Value.ToString();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
+
             dgvToDo.Rows.RemoveAt(dgvToDo.SelectedRows[0].Index);
             txtTitle.Clear();
             txtDescription.Clear();
@@ -49,6 +52,12 @@ namespace ToDoApp
             txtDescription.Clear();
             dtpDate.Value = DateTime.Now;
             dtpTime.Value = DateTime.Now;
+            cbxStatus.SelectedIndex = 0;
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            cbxStatus.SelectedIndex = 0;
         }
     }
 }
